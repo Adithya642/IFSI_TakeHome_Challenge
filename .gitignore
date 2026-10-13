@@ -1,0 +1,13 @@
+# Build output
+target/
+server/target/
+
+# Local SQLite database (rebuild with db/reset.sh)
+*.db
+*.db-journal
+
+# IDE
+.idea/
+*.iml
+.vscode/
+NOTES.md

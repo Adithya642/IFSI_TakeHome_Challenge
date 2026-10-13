@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exam Request - Code Challenge</title>
+  <!-- You may add your own CSS/JS files or use a library (jQuery, etc.). No framework is required. -->
+  <style>
+    body { font-family: Arial, sans-serif; margin: 2rem; }
+  </style>
+</head>
+<body>
+  <h1>Exam Request</h1>
+
+  <!-- TASK 2a: Exam request form.
+       Required fields: student, course, requested exam date.
+       Also include: a "Needs testing accommodation" checkbox and an
+       optional Notes field.
+       - Show clear, visible errors for missing required fields.
+       - If "Needs testing accommodation" is checked, show a confirmation
+         prompt on submit; if the user cancels, uncheck the box and do not submit.
+       - Every input needs a label; the form must work with the keyboard alone.
+       - On submit: add the request to the table and send it to your
+         server code (Task 3). On the hosted URL, saving to the browser
+         is fine if no server is available. -->
+  <form id="requestForm" novalidate>
+    <!-- build the form here -->
+  </form>
+
+  <hr>
+
+  <h2>Current Requests</h2>
+  <!-- TASK 2b: Requests table.
+       - Load data from sample_requests.json (or from your server).
+       - Add a text box that filters the table as the user types.
+       - Readable and usable at phone width (~375px). -->
+  <label for="filter">Filter requests</label>
+  <input type="text" id="filter" placeholder="Type to filter...">
+  <table id="requestsTable">
+    <!-- rows go here -->
+  </table>
+
+  <script>
+    // Your JavaScript here (or in a separate file).
+  </script>
+</body>
+</html>
