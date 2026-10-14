@@ -3,6 +3,7 @@ package edu.ifsi.examrequests.service;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import edu.ifsi.examrequests.model.Course;
 import edu.ifsi.examrequests.model.ExamRequest;
@@ -34,6 +35,8 @@ public class ExamRequestService {
     }
 
     // Throws ValidationException if the input is invalid; nothing is saved in that case.
+    // One transaction: if the read-back fails, the insert is rolled back too.
+    @Transactional
     public ExamRequest createRequest(NewExamRequest input) {
         ValidatedRequest valid = validator.validate(input);
         int requestId = examRequestRepository.insert(valid);

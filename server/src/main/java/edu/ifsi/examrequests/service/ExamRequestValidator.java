@@ -1,6 +1,7 @@
 package edu.ifsi.examrequests.service;
 
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.format.DateTimeParseException;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -19,6 +20,9 @@ import edu.ifsi.examrequests.repository.StudentRepository;
 public class ExamRequestValidator {
 
     public static final int MAX_NOTES_LENGTH = 500;
+
+    // IFSI is in Illinois: "today" means Central Time regardless of where the server runs.
+    private static final ZoneId BUSINESS_ZONE = ZoneId.of("America/Chicago");
 
     private final StudentRepository studentRepository;
     private final CourseRepository courseRepository;
@@ -95,7 +99,7 @@ public class ExamRequestValidator {
             errors.put("request_date", "Enter a real date as YYYY-MM-DD.");
             return null;
         }
-        if (date.isBefore(LocalDate.now())) {
+        if (date.isBefore(LocalDate.now(BUSINESS_ZONE))) {
             errors.put("request_date", "Exam date can't be in the past.");
             return null;
         }

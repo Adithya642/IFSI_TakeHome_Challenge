@@ -1,0 +1,250 @@
+/* Design tokens: change the look here. */
+:root {
+  --color-bg: #f4f5f7;
+  --color-surface: #ffffff;
+  --color-text: #1f2328;
+  --color-muted: #57606a;
+  --color-border: #d0d7de;
+  --color-primary: #1f3a5f;
+  --color-primary-hover: #152a46;
+  --color-accent: #b42318;
+  --color-error: #b42318;
+  --color-success: #1e6b34;
+  --color-focus: #2563eb;
+  --radius: 8px;
+  --space: 1rem;
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: var(--font);
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--color-text);
+  background: var(--color-bg);
+}
+
+.container { max-width: 1100px; margin: 0 auto; padding: 0 var(--space); }
+
+/* Header */
+.site-header {
+  background: var(--color-primary);
+  color: #fff;
+  border-bottom: 4px solid var(--color-accent);
+  padding: 1.25rem 0;
+  margin-bottom: 1.5rem;
+}
+.site-header h1 { margin: 0; font-size: 1.6rem; }
+.site-org {
+  margin: 0;
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+
+.demo-badge {
+  display: inline-block;
+  margin: 0.5rem 0 0;
+  padding: 0.2rem 0.75rem;
+  border-radius: 999px;
+  background: #fff4e5;
+  color: #8a4b00;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+/* Section cards */
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.card h2 { margin: 0 0 0.25rem; font-size: 1.3rem; }
+.intro { margin: 0 0 1rem; color: var(--color-muted); }
+
+/* Form */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.5rem 1.5rem;
+}
+.field { display: flex; flex-direction: column; }
+.field-wide { grid-column: 1 / -1; }
+label { font-weight: 600; margin-bottom: 0.3rem; }
+.required-mark { color: var(--color-error); }
+.optional { font-weight: 400; color: var(--color-muted); }
+
+input[type="text"], input[type="search"], input[type="date"], select, textarea {
+  font: inherit;
+  color: inherit;
+  width: 100%;
+  min-height: 44px;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #8c959f;
+  border-radius: var(--radius);
+  background: #fff;
+}
+textarea { resize: vertical; }
+
+.field-checkbox {
+  flex-direction: row;
+  align-items: center;
+  gap: 0.6rem;
+  align-self: center;
+  min-height: 44px;
+}
+.field-checkbox input { width: 1.25rem; height: 1.25rem; margin: 0; }
+.field-checkbox label { margin: 0; }
+
+.hint { margin: 0.25rem 0 0; font-size: 0.875rem; color: var(--color-muted); }
+.counter { text-align: right; }
+
+/* Errors (filled by app.js) */
+.error {
+  margin: 0.25rem 0 0;
+  min-height: 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-error);
+}
+[aria-invalid="true"] { border-color: var(--color-error); border-width: 2px; }
+
+.form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.75rem;
+}
+.button {
+  font: inherit;
+  font-weight: 600;
+  min-height: 44px;
+  padding: 0.6rem 1.4rem;
+  border: none;
+  border-radius: var(--radius);
+  color: #fff;
+  background: var(--color-primary);
+  cursor: pointer;
+}
+.button:hover { background: var(--color-primary-hover); }
+.form-status { margin: 0; font-weight: 600; color: var(--color-success); }
+.form-status.is-error { color: var(--color-error); }
+
+/* Keyboard focus: thick and obvious, only when navigating by keyboard. */
+:focus-visible { outline: 3px solid var(--color-focus); outline-offset: 2px; }
+
+/* Table tools */
+.table-tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 0.5rem 1rem;
+  margin-bottom: 0.75rem;
+}
+.table-tools .field { flex: 1 1 280px; max-width: 420px; }
+.result-count { margin: 0; color: var(--color-muted); }
+
+/* Requests table */
+.requests-table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+.requests-table th, .requests-table td {
+  text-align: left;
+  vertical-align: top;
+  padding: 0.6rem 0.75rem;
+  border-bottom: 1px solid var(--color-border);
+}
+.requests-table th { background: #eef1f4; font-weight: 600; }
+.requests-table .cell-nowrap { white-space: nowrap; }
+.requests-table .cell-notes { overflow-wrap: anywhere; min-width: 12rem; }
+
+/* Just-submitted row. */
+.requests-table tr.is-new {
+  background: #fff8db;
+  box-shadow: inset 4px 0 0 var(--color-accent);
+}
+.empty { padding: 1rem 0; color: var(--color-muted); }
+
+/* Status badges: the text always carries the meaning, color is extra. */
+.badge {
+  display: inline-block;
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.badge-pending   { background: #fff4e5; color: #8a4b00; }
+.badge-approved  { background: #e7f6ec; color: #1e6b34; }
+.badge-denied    { background: #fdecea; color: #a8231a; }
+.badge-completed { background: #e8eef7; color: #1f3a5f; }
+
+/* Hidden visually, still read by screen readers. */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* Phone: form fields stack full width. */
+@media (max-width: 640px) {
+  .form-grid { grid-template-columns: 1fr; }
+  .card { padding: 1rem; }
+  .button { width: 100%; }
+
+  /* Each table row becomes a stacked card with its own labels. */
+  .requests-table thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+
+  .requests-table,
+  .requests-table tbody,
+  .requests-table tr,
+  .requests-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .requests-table tr {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: 0.5rem 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .requests-table td {
+    display: grid;
+    grid-template-columns: 7rem minmax(0, 1fr);   /* value column may shrink to fit the card */
+    gap: 0.5rem;
+    padding: 0.35rem 0;
+    border-bottom: none;
+  }
+
+  .requests-table td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: var(--color-muted);
+  }
+
+  /* In cards every value has its own line, so wrapping is safe and width limits aren't needed. */
+  .requests-table .cell-nowrap { white-space: normal; }
+  .requests-table .cell-notes { min-width: 0; }
+
+  .table-tools .field {
+    max-width: none;
+  }
+}

@@ -3,45 +3,99 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Exam Request - Code Challenge</title>
-  <!-- You may add your own CSS/JS files or use a library (jQuery, etc.). No framework is required. -->
-  <style>
-    body { font-family: Arial, sans-serif; margin: 2rem; }
-  </style>
+  <title>IFSI Exam Requests</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
 </head>
 <body>
-  <h1>Exam Request</h1>
+  <header class="site-header">
+    <div class="container">
+      <p class="site-org">Illinois Fire Service Institute</p>
+      <h1>Certification Exam Requests</h1>
+      <p id="demoModeBadge" class="demo-badge" hidden>Demo mode: saved in this browser only</p>
+    </div>
+  </header>
 
-  <!-- TASK 2a: Exam request form.
-       Required fields: student, course, requested exam date.
-       Also include: a "Needs testing accommodation" checkbox and an
-       optional Notes field.
-       - Show clear, visible errors for missing required fields.
-       - If "Needs testing accommodation" is checked, show a confirmation
-         prompt on submit; if the user cancels, uncheck the box and do not submit.
-       - Every input needs a label; the form must work with the keyboard alone.
-       - On submit: add the request to the table and send it to your
-         server code (Task 3). On the hosted URL, saving to the browser
-         is fine if no server is available. -->
-  <form id="requestForm" novalidate>
-    <!-- build the form here -->
-  </form>
+  <main class="container">
+    <section class="card" aria-labelledby="form-heading">
+      <h2 id="form-heading">Request an exam</h2>
+      <p class="intro">Fields marked <span class="required-mark">*</span> are required.</p>
 
-  <hr>
+      <form id="requestForm" novalidate>
+        <div class="form-grid">
+          <div class="field">
+            <label for="studentId">Student ID <span class="required-mark" aria-hidden="true">*</span></label>
+            <input id="studentId" name="student_id" type="text" inputmode="numeric" autocomplete="off"
+                   required aria-describedby="studentId-hint studentId-error">
+            <p id="studentId-hint" class="hint">Sample data uses 1–10.</p>
+            <p id="studentId-error" class="error"></p>
+          </div>
 
-  <h2>Current Requests</h2>
-  <!-- TASK 2b: Requests table.
-       - Load data from sample_requests.json (or from your server).
-       - Add a text box that filters the table as the user types.
-       - Readable and usable at phone width (~375px). -->
-  <label for="filter">Filter requests</label>
-  <input type="text" id="filter" placeholder="Type to filter...">
-  <table id="requestsTable">
-    <!-- rows go here -->
-  </table>
+          <div class="field">
+            <label for="courseCode">Course <span class="required-mark" aria-hidden="true">*</span></label>
+            <select id="courseCode" name="course_code" required aria-describedby="courseCode-error">
+              <option value="">Choose a course…</option>
+            </select>
+            <p id="courseCode-error" class="error"></p>
+          </div>
 
-  <script>
-    // Your JavaScript here (or in a separate file).
-  </script>
+          <div class="field">
+            <label for="requestDate">Exam date <span class="required-mark" aria-hidden="true">*</span></label>
+            <input id="requestDate" name="request_date" type="date" required
+                   aria-describedby="requestDate-error">
+            <p id="requestDate-error" class="error"></p>
+          </div>
+
+          <div class="field field-checkbox">
+            <input id="needsAccommodation" name="needs_accommodation" type="checkbox">
+            <label for="needsAccommodation">Needs testing accommodation</label>
+          </div>
+
+          <div class="field field-wide">
+            <label for="notes">Notes <span class="optional">(optional)</span></label>
+            <textarea id="notes" name="notes" rows="3" maxlength="500"
+                      aria-describedby="notesCount notes-error"></textarea>
+            <p id="notesCount" class="hint counter">0/500</p>
+            <p id="notes-error" class="error"></p>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="button">Submit request</button>
+          <p id="formStatus" class="form-status" role="status"></p>
+        </div>
+      </form>
+    </section>
+
+    <section class="card" aria-labelledby="table-heading">
+      <h2 id="table-heading">Staff view: current requests</h2>
+
+      <div class="table-tools">
+        <div class="field">
+          <label for="filter">Filter requests</label>
+          <input id="filter" type="search" placeholder="Name, course, status…" autocomplete="off">
+        </div>
+        <p id="resultCount" class="result-count" role="status"></p>
+      </div>
+
+      <table id="requestsTable" class="requests-table">
+        <caption class="visually-hidden">Exam requests</caption>
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Student</th>
+            <th scope="col">Department</th>
+            <th scope="col">Course</th>
+            <th scope="col">Exam date</th>
+            <th scope="col">Status</th>
+            <th scope="col">Accommodation</th>
+            <th scope="col">Notes</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <p id="noMatches" class="empty" hidden>No requests match your filter.</p>
+    </section>
+  </main>
 </body>
 </html>
