@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>IFSI Exam Requests</title>
   <link rel="stylesheet" href="styles.css">
-  <script src="app.js" defer></script>
+  <script type="module" src="app.js"></script>
 </head>
 <body>
   <header class="site-header">
@@ -97,5 +97,19 @@
       <p id="noMatches" class="empty" hidden>No requests match your filter.</p>
     </section>
   </main>
+
+  <dialog id="accommodationDialog" class="dialog"
+          aria-labelledby="accommodationDialogTitle" aria-describedby="accommodationDialogText">
+    <form method="dialog">
+      <h2 id="accommodationDialogTitle">Confirm testing accommodation</h2>
+      <p id="accommodationDialogText">You've asked for a testing accommodation for this exam.
+        Submit the request with an accommodation?</p>
+      <p class="hint">If you choose Go back, the box is unchecked and nothing is submitted.</p>
+      <div class="dialog-actions">
+        <button value="cancel" class="button button-secondary">Go back</button>
+        <button value="confirm" class="button" autofocus>Submit with accommodation</button>
+      </div>
+    </form>
+  </dialog>
 </body>
 </html>
